@@ -1,10 +1,16 @@
 package ir.mmdaminah.vehicleservice.query;
 
+import ir.mmdaminah.vehicleservice.core.dto.VehicleDto;
+import ir.mmdaminah.vehicleservice.core.entity.CustomerVehicle;
 import ir.mmdaminah.vehicleservice.core.entity.Vehicle;
+import ir.mmdaminah.vehicleservice.core.repository.CustomerVehicleRepository;
 import ir.mmdaminah.vehicleservice.core.repository.VehicleRepository;
+import ir.mmdaminah.vehicleservice.events.VehicleAssignedToCustomerEvent;
 import ir.mmdaminah.vehicleservice.events.VehicleCreatedEvent;
+import ir.mmdaminah.vehicleservice.query.queries.FindVehicleQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.queryhandling.QueryUpdateEmitter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -13,20 +19,46 @@ import org.springframework.stereotype.Component;
 public class VehicleEventsHandler {
 
     private final VehicleRepository vehicleRepository;
+    private final CustomerVehicleRepository customerVehicleRepository;
+    private final QueryUpdateEmitter queryUpdateEmitter;
 
-    public VehicleEventsHandler(VehicleRepository vehicleRepository) {
+    public VehicleEventsHandler(VehicleRepository vehicleRepository,
+                                CustomerVehicleRepository customerVehicleRepository,
+                                QueryUpdateEmitter queryUpdateEmitter) {
         this.vehicleRepository = vehicleRepository;
+        this.customerVehicleRepository = customerVehicleRepository;
+        this.queryUpdateEmitter = queryUpdateEmitter;
     }
 
     @EventHandler
-    private void handle(VehicleCreatedEvent event) {
+    public void handle(VehicleCreatedEvent event) {
         var vehicle = new Vehicle();
 
         BeanUtils.copyProperties(event, vehicle);
 
         vehicleRepository.save(vehicle);
 
-        log.info("VehicleEventsHandler:VehicleCreatedEvent: vehicleId={}, comapny={}, model={}, color={}, year={}", event.getVehicleId(), event.getCompany(), event.getModel(), event.getColor(), event.getYear());
+        queryUpdateEmitter.emit(
+                FindVehicleQuery.class,
+                query -> true,
+                new VehicleDto(
+                        event.getVehicleId(),
+                        event.getCompany(),
+                        event.getModel(),
+                        event.getColor(),
+                        event.getProductionYear())
+        );
+
+        log.info("VehicleEventsHandler:VehicleCreatedEvent: vehicleId={}, comapny={}, model={}, color={}, year={}", event.getVehicleId(), event.getCompany(), event.getModel(), event.getColor(), event.getProductionYear());
+    }
+
+    @EventHandler
+    private void handle(VehicleAssignedToCustomerEvent event) {
+
+        var customerVehicle = new CustomerVehicle();
+        BeanUtils.copyProperties(event, customerVehicle);
+
+        customerVehicleRepository.save(customerVehicle);
     }
 
 }

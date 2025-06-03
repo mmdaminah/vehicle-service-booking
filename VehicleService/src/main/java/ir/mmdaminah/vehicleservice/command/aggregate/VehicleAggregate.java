@@ -10,8 +10,8 @@ import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 
-@Aggregate
 @Slf4j
+@Aggregate
 public class VehicleAggregate {
 
     @AggregateIdentifier
@@ -19,13 +19,14 @@ public class VehicleAggregate {
     private String company;
     private String model;
     private String color;
-    private Integer year;
+    private Integer productionYear;
 
-    public VehicleAggregate(){}
+    public VehicleAggregate() {
+    }
 
     @CommandHandler
-    private void handle(CreateVehicleCommand command){
-        log.info("VehicleAggregate:CreateVehicleCommand: vehicleId={}, company={}, model={}, color={}, year={}", command.getVehicleId(), command.getCompany(), command.getModel(), command.getColor(), command.getYear());
+    public VehicleAggregate(CreateVehicleCommand command) {
+        log.info("VehicleAggregate:CreateVehicleCommand: vehicleId={}, company={}, model={}, color={}, productionYear={}", command.getVehicleId(), command.getCompany(), command.getModel(), command.getColor(), command.getProductionYear());
 
         var vehicleCreatedEvent = new VehicleCreatedEvent();
         BeanUtils.copyProperties(command, vehicleCreatedEvent);
@@ -34,11 +35,11 @@ public class VehicleAggregate {
     }
 
     @EventSourcingHandler
-    private void on(VehicleCreatedEvent event){
+    private void on(VehicleCreatedEvent event) {
         this.vehicleId = event.getVehicleId();
         this.company = event.getCompany();
         this.model = event.getModel();
         this.color = event.getColor();
-        this.year = event.getYear();
+        this.productionYear = event.getProductionYear();
     }
 }

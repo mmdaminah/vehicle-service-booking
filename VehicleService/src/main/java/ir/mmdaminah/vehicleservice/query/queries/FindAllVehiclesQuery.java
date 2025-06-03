@@ -1,4 +1,4 @@
 package ir.mmdaminah.vehicleservice.query.queries;
 
-public class FindAllVehicles {
+public class FindAllVehiclesQuery {
 }

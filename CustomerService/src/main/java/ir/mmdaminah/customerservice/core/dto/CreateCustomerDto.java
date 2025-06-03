@@ -4,18 +4,17 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 public class CreateCustomerDto {
 
     @NotNull
-    @Min(2)
-    @Max(100)
+    @Length(min = 2, max = 100)
     private String firstName;
 
     @NotNull
-    @Min(2)
-    @Max(100)
+    @Length(min = 2, max = 100)
     private String lastName;
 
 }

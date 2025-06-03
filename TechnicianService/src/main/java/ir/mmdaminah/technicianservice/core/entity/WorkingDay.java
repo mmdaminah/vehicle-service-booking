@@ -24,7 +24,7 @@ public class WorkingDay {
     private Day day;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "day-id")
+    @JoinColumn(name = "day_id")
     private List<WorkingTime> workingTimes;
 
 }

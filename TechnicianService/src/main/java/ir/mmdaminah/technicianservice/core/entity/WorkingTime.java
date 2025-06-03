@@ -18,16 +18,16 @@ public class WorkingTime {
     @GeneratedValue(strategy = GenerationType.UUID)
     private BigInteger id;
 
-    @Column(name= "start-hour")
+    @Column(name = "start_hour")
     private Integer startHour;
 
-    @Column(name = "start-minute")
+    @Column(name = "start_minute")
     private Integer startMinute;
 
-    @Column(name = "end-hour")
+    @Column(name = "end_hour")
     private Integer endHour;
 
-    @Column(name = "end-minute")
+    @Column(name = "end_minute")
     private Integer endMinute;
 
 }

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class BookServiceCommand {
     private String technicianId;
     private String customerId;
     private String startTime;
+    private Date date;
 }

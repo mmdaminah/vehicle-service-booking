@@ -1,4 +1,38 @@
 package ir.mmdaminah.vehicleservice.command.aggregate;
 
+import ir.mmdaminah.vehicleservice.command.commands.AssignVehicleToCustomerCommand;
+import ir.mmdaminah.vehicleservice.events.VehicleAssignedToCustomerEvent;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateLifecycle;
+import org.axonframework.spring.stereotype.Aggregate;
+
+@Aggregate
 public class CustomerVehicleAggregate {
+
+    @AggregateIdentifier
+    private String customerVehicleId;
+    private String customerId;
+    private String vehicleId;
+    private String plateNumber;
+
+    public CustomerVehicleAggregate() {
+    }
+
+    @CommandHandler
+    public CustomerVehicleAggregate(AssignVehicleToCustomerCommand command) {
+        var event = new VehicleAssignedToCustomerEvent(customerVehicleId, customerId, vehicleId, plateNumber);
+
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleAssignedToCustomerEvent event) {
+        this.customerVehicleId = event.getCustomerVehicleId();
+        this.customerId = event.getCustomerId();
+        this.vehicleId = event.getVehicleId();
+        this.plateNumber = event.getPlateNumber();
+    }
+
 }

@@ -1,1 +1,8 @@
-spring.application.name=Core
+spring:
+  application:
+    name: core
+
+
+axon:
+  serializer:
+    events: jackson

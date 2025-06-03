@@ -10,6 +10,8 @@ import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Date;
+
 @Aggregate
 @Slf4j
 public class BookingAggregate {
@@ -20,12 +22,14 @@ public class BookingAggregate {
     private String technicianId;
     private String customerId;
     private String startTime;
+    private Date date;
 
-    public BookingAggregate() {}
+    public BookingAggregate() {
+    }
 
     @CommandHandler
     public BookingAggregate(BookServiceCommand command) {
-        log.info("BookingAggregate:BookServiceCommand {}", command);
+        log.info("BookingAggregate:BookServiceCommand {}", command.toString());
 
         ServiceBookedEvent serviceBookedEvent = new ServiceBookedEvent();
         BeanUtils.copyProperties(command, serviceBookedEvent);
@@ -40,6 +44,7 @@ public class BookingAggregate {
         this.technicianId = event.getTechnicianId();
         this.customerId = event.getCustomerId();
         this.startTime = event.getStartTime();
+        this.date = new Date();
     }
 
 }

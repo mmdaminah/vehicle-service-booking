@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
 
     @Id
-    @Column( name = "vehicle-id", unique = true )
+    @Column( name = "vehicle_id", unique = true )
     private String vehicleId;
 
     private String company;
@@ -25,6 +25,6 @@ public class Vehicle {
 
     private String color;
 
-    private Integer year;
+    private Integer productionYear;
 
 }

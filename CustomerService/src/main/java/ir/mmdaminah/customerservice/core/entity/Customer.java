@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 public class Customer {
 
     @Id
-    @Column(name = "customer-id", unique = true)
+    @Column(name = "customer_id", unique = true)
     private String customerId;
 
-    @Column(name = "first-name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last-name")
+    @Column(name = "last_name")
     private String lastName;
 
 }

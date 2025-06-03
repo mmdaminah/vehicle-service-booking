@@ -1,4 +1,7 @@
 package ir.mmdaminah.technicianservice.core.repository;
 
-public class TechnicianReservatonRepository {
+import ir.mmdaminah.technicianservice.core.entity.TechnicianReservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TechnicianReservationRepository extends JpaRepository<TechnicianReservation, String> {
 }

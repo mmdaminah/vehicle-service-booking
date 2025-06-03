@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class BookServiceDto {
 
     @NotNull
     private String startTime;
+
+    @NotNull
+    private Date date;
 }

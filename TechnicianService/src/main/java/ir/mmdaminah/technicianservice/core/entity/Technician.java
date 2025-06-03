@@ -16,17 +16,17 @@ import java.util.List;
 public class Technician {
 
     @Id
-    @Column(name = "technician-id")
+    @Column(name = "technician_id")
     private String technicianId;
 
-    @Column(name = "first-name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last-name")
+    @Column(name = "last_name")
     private String lastName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "technician-id")
+    @JoinColumn(name = "technician_id")
     private List<WorkingDay> workingDays;
 
 }

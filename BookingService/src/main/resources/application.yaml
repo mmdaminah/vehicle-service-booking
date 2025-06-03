@@ -2,7 +2,7 @@ spring:
   application:
     name: booking-service
   datasource:
-    url: jdbc:h2:file:~/customer;AUTO_SERVER=true
+    url: jdbc:h2:file:~/booking;AUTO_SERVER=true
     username: root
     password: root
     driver-class-name: org.h2.Driver
@@ -33,7 +33,4 @@ server:
 
 axon:
   serializer:
-    messages: jackson
     events: jackson
-    general: jackson
-

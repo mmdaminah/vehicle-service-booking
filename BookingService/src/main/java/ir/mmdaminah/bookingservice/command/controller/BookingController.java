@@ -30,6 +30,7 @@ public class BookingController {
                 .technicianId(dto.getTechnicianId())
                 .customerId(dto.getCustomerId())
                 .startTime(dto.getStartTime())
+                .date(dto.getDate())
                 .build();
 
         String result = commandGateway.sendAndWait(command);

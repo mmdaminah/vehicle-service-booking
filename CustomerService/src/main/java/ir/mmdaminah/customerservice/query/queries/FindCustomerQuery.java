@@ -1,4 +1,8 @@
 package ir.mmdaminah.customerservice.query.queries;
 
-public class FindCustomerByIdQuery {
+import lombok.Value;
+
+@Value
+public class FindCustomerQuery {
+    private String customerId;
 }

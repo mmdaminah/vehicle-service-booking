@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ServiceCenter {
 
     @Id
-    @Column(name = "service-center-id")
+    @Column(name = "service_center_id")
     private String serviceCenterId;
 
     private String name;

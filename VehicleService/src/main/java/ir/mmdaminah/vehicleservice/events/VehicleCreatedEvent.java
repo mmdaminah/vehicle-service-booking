@@ -12,5 +12,5 @@ public class VehicleCreatedEvent {
     private String company;
     private String model;
     private String color;
-    private Integer year;
+    private Integer productionYear;
 }

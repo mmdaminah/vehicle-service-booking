@@ -1,5 +1,7 @@
 package ir.mmdaminah.technicianservice.command.aggregate;
 
+import ir.mmdaminah.core.commands.ReserveTechnicianCommand;
+import ir.mmdaminah.core.events.TechnicianReservedEvent;
 import ir.mmdaminah.technicianservice.command.commands.CreateTechnicianCommand;
 import ir.mmdaminah.technicianservice.core.validation.WorkingDayProperty;
 import ir.mmdaminah.technicianservice.events.TechnicianCreatedEvent;
@@ -42,5 +44,7 @@ public class TechnicianAggregate {
         this.lastName = event.getLastName();
         this.workingDays = event.getWorkingDays();
     }
+
+
 
 }

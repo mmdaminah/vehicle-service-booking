@@ -26,7 +26,7 @@ public class BookingEventsHandler {
         Booking booking = bookingMapper.toEntity(event);
         bookingRepository.save(booking);
 
-        log.info("BookingEventsHandler:ServiceBookedEvent: bookinId={}, serviceId={}, technicianId={}, customerId={}, startTime={}", event.getBookingId(), event.getServiceId(), event.getTechnicianId(), event.getCustomerId(), event.getStartTime());
+        log.info("BookingEventsHandler:ServiceBookedEvent: bookingId={}, serviceId={}, technicianId={}, customerId={}, startTime={}, date={}", event.getBookingId(), event.getServiceId(), event.getTechnicianId(), event.getCustomerId(), event.getStartTime(), event.getDate());
     }
 
 }
