@@ -15,7 +15,4 @@ public class CreateVehicleCommand {
     private String vehicleId;
     private String company;
     private String model;
-    // TODO: this property is redundant should be transfered to assing vehicle command
-    private String color;
-    private Integer productionYear;
 }

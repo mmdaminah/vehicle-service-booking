@@ -2,7 +2,7 @@ spring:
   application:
     name: vehicle-service
   datasource:
-    url: jdbc:h2:file:~/customer;AUTO_SERVER=true
+    url: jdbc:h2:file:~/vehicles;AUTO_SERVER=true
     username: root
     password: root
     driver-class-name: org.h2.Driver

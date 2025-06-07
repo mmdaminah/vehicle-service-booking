@@ -41,8 +41,6 @@ public class VehicleCommandController {
                 .vehicleId(vehicleId)
                 .company(createVehicleDto.getCompany())
                 .model(createVehicleDto.getModel())
-                .color(createVehicleDto.getColor())
-                .productionYear(createVehicleDto.getProductionYear())
                 .build();
 
         try {
@@ -53,7 +51,7 @@ public class VehicleCommandController {
         }
     }
 
-    @PostMapping("/assign/{customer-id}/{vehicle-id}")
+    @PostMapping("/assign/{customerId}/{vehicleId}")
     public String assignVehicleToCustomer(
             @Valid @RequestBody AssignVehicleToCustomerDto dto,
             @NotNull @PathVariable String customerId,
@@ -65,6 +63,8 @@ public class VehicleCommandController {
                 .customerId(customerId)
                 .vehicleId(vehicleId)
                 .plateNumber(dto.getPlateNumber())
+                .color(dto.getColor())
+                .productionYear(dto.getProductionYear())
                 .build();
 
         return commandGateway.sendAndWait(command);

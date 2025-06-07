@@ -24,15 +24,15 @@ public class VehicleQueryController {
     }
 
     @GetMapping
-    public List<VehicleDto> findAll() {
+    public List<VehicleDto> listVehicles() {
         return queryGateway.query(
                 new FindAllVehiclesQuery(),
                 ResponseTypes.multipleInstancesOf(VehicleDto.class)
         ).join();
     }
 
-    @GetMapping("/{customer-id}")
-    public List<VehicleDto> getCustomerVehicles(@NotNull @PathVariable("customer-id") String customerId) {
+    @GetMapping("/{customerId}")
+    public List<VehicleDto> getCustomerVehicles(@NotNull @PathVariable("customerId") String customerId) {
         return queryGateway.query(
                 new FindCustomerVehiclesQuery(customerId),
                 ResponseTypes.multipleInstancesOf(VehicleDto.class)

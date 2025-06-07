@@ -1,10 +1,12 @@
 package ir.mmdaminah.vehicleservice.query;
 
 import ir.mmdaminah.vehicleservice.core.dto.VehicleDto;
+import ir.mmdaminah.vehicleservice.core.repository.CustomerVehicleRepository;
 import ir.mmdaminah.vehicleservice.core.repository.VehicleRepository;
 import ir.mmdaminah.vehicleservice.query.queries.FindAllVehiclesQuery;
 import ir.mmdaminah.vehicleservice.query.queries.FindCustomerVehiclesQuery;
 import ir.mmdaminah.vehicleservice.query.queries.FindVehicleQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -12,24 +14,27 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@Slf4j
 public class VehicleQueriesHandler {
 
     private final VehicleRepository vehicleRepository;
+    private final CustomerVehicleRepository customerVehicleRepository;
 
-    public VehicleQueriesHandler(VehicleRepository vehicleRepository) {
+    public VehicleQueriesHandler(VehicleRepository vehicleRepository, CustomerVehicleRepository customerVehicleRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.customerVehicleRepository = customerVehicleRepository;
     }
 
     @QueryHandler
     public List<VehicleDto> getVehicles(FindCustomerVehiclesQuery query) {
 
-        // TODO: this is wrong, should filter by customer id
-        return vehicleRepository.findAll().stream().map(vehicle -> {
+        var data = customerVehicleRepository.findAllByCustomerId(query.getCustomerId());
+        log.info("get vehicles from customer id {}", data.toString());
+        return customerVehicleRepository.findAllByCustomerId(query.getCustomerId()).stream().map(customerVehicle -> {
             VehicleDto vehicleDto = new VehicleDto();
-            BeanUtils.copyProperties(vehicle, vehicleDto);
+            BeanUtils.copyProperties(customerVehicle.getVehicle(), vehicleDto);
             return vehicleDto;
         }).toList();
-
     }
 
     @QueryHandler

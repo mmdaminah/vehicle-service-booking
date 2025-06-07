@@ -23,12 +23,4 @@ public class CreateVehicleDto {
     @Length(min = 1, max = 60)
     private String model;
 
-    @NotNull
-    @Length(min = 1, max = 30)
-    private String color;
-
-    @NotNull
-    @Min(1940)
-    @Max(2099)
-    private Integer productionYear;
 }

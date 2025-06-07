@@ -11,6 +11,4 @@ public class VehicleCreatedEvent {
     private String vehicleId;
     private String company;
     private String model;
-    private String color;
-    private Integer productionYear;
 }

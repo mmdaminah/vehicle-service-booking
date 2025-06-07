@@ -12,4 +12,6 @@ public class VehicleAssignedToCustomerEvent {
     private String customerId;
     private String vehicleId;
     private String plateNumber;
+    private String color;
+    private Integer productionYear;
 }

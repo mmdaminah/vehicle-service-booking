@@ -44,21 +44,24 @@ public class VehicleEventsHandler {
                 new VehicleDto(
                         event.getVehicleId(),
                         event.getCompany(),
-                        event.getModel(),
-                        event.getColor(),
-                        event.getProductionYear())
+                        event.getModel()
+                )
         );
 
-        log.info("VehicleEventsHandler:VehicleCreatedEvent: vehicleId={}, comapny={}, model={}, color={}, year={}", event.getVehicleId(), event.getCompany(), event.getModel(), event.getColor(), event.getProductionYear());
+        log.info("VehicleEventsHandler:VehicleCreatedEvent: vehicleId={}, company={}, model={}", event.getVehicleId(), event.getCompany(), event.getModel());
     }
 
     @EventHandler
     private void handle(VehicleAssignedToCustomerEvent event) {
 
+        var vehicle = vehicleRepository.findById(event.getVehicleId());
         var customerVehicle = new CustomerVehicle();
         BeanUtils.copyProperties(event, customerVehicle);
+        customerVehicle.setVehicle(vehicle.orElse(null));
 
         customerVehicleRepository.save(customerVehicle);
+
+        log.info("VehicleEventsHandler:VehicleAssignedToCustomerEvent: event={}", event);
     }
 
 }

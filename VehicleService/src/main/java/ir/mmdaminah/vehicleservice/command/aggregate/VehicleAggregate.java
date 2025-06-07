@@ -18,15 +18,13 @@ public class VehicleAggregate {
     private String vehicleId;
     private String company;
     private String model;
-    private String color;
-    private Integer productionYear;
 
     public VehicleAggregate() {
     }
 
     @CommandHandler
     public VehicleAggregate(CreateVehicleCommand command) {
-        log.info("VehicleAggregate:CreateVehicleCommand: vehicleId={}, company={}, model={}, color={}, productionYear={}", command.getVehicleId(), command.getCompany(), command.getModel(), command.getColor(), command.getProductionYear());
+        log.info("VehicleAggregate:CreateVehicleCommand: vehicleId={}, company={}, model={}", command.getVehicleId(), command.getCompany(), command.getModel());
 
         var vehicleCreatedEvent = new VehicleCreatedEvent();
         BeanUtils.copyProperties(command, vehicleCreatedEvent);
@@ -39,7 +37,5 @@ public class VehicleAggregate {
         this.vehicleId = event.getVehicleId();
         this.company = event.getCompany();
         this.model = event.getModel();
-        this.color = event.getColor();
-        this.productionYear = event.getProductionYear();
     }
 }

@@ -7,6 +7,7 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.beans.BeanUtils;
 
 @Aggregate
 public class CustomerVehicleAggregate {
@@ -16,13 +17,16 @@ public class CustomerVehicleAggregate {
     private String customerId;
     private String vehicleId;
     private String plateNumber;
+    private String color;
+    private Integer productionYear;
 
     public CustomerVehicleAggregate() {
     }
 
     @CommandHandler
     public CustomerVehicleAggregate(AssignVehicleToCustomerCommand command) {
-        var event = new VehicleAssignedToCustomerEvent(customerVehicleId, customerId, vehicleId, plateNumber);
+        var event = new VehicleAssignedToCustomerEvent();
+        BeanUtils.copyProperties(command, event);
 
         AggregateLifecycle.apply(event);
     }
@@ -33,6 +37,8 @@ public class CustomerVehicleAggregate {
         this.customerId = event.getCustomerId();
         this.vehicleId = event.getVehicleId();
         this.plateNumber = event.getPlateNumber();
+        this.color = event.getColor();
+        this.productionYear = event.getProductionYear();
     }
 
 }
