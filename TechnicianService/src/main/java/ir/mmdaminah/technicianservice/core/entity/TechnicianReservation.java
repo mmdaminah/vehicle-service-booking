@@ -11,26 +11,26 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "technician-reservation")
+@Table(name = "technician_reservation")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TechnicianReservation {
 
     @Id
-    @Column(name = "reservation-id", unique = true, nullable = false)
+    @Column(name = "reservation_id", unique = true, nullable = false)
     private String reservationId;
 
-    @Column(name = "technician-id")
+    @Column(name = "technician_id")
     private String technicianId;
 
-    @Column(name = "booking-id")
+    @Column(name = "booking_id")
     private String bookingId;
 
-    @Column(name = "service-id")
+    @Column(name = "service_id")
     private String serviceId;
 
-    @Column(name = "customer-id")
+    @Column(name = "customer_id")
     private String customerId;
 
     @Column(name = "start-time")

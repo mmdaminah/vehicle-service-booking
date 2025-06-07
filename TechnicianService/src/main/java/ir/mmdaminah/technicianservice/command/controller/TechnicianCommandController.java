@@ -25,7 +25,7 @@ public class TechnicianCommandController {
                 .technicianId(UUID.randomUUID().toString())
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
-                .workingDayProperties(dto.getWorkingDayProperties())
+                .workingDays(dto.getWorkingDays())
                 .build();
 
         String result = commandGateway.sendAndWait(command);

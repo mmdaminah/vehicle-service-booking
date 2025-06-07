@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -18,13 +19,11 @@ import java.util.List;
 public class CreateTechnicianDto {
 
     @NotNull
-    @Min(2)
-    @Max(100)
+    @Length(min = 2, max = 100)
     private String firstName;
 
     @NotNull
-    @Min(2)
-    @Max(100)
+    @Length(min = 2, max = 100)
     private String lastName;
     private List<WorkingDayProperty> workingDays;
 }

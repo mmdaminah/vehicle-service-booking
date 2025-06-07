@@ -10,21 +10,22 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Entity
-@Table( name = "working-days")
+@Table( name = "working_days")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class WorkingDay {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private BigInteger id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "week_day")
     private Day day;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "day_id")
+    @JoinColumn( name = "working_time_id")
     private List<WorkingTime> workingTimes;
 
 }

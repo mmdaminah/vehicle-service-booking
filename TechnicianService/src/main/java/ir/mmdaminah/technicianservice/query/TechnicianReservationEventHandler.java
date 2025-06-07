@@ -25,7 +25,7 @@ public class TechnicianReservationEventHandler {
 
         reservationRepository.save(reservation);
 
-        log.info("TechnicianReservationEventHandler:TechnicianReservedEvent: {}", event);
+        log.info("TechnicianReservationEventHandler: event = {}", event);
     }
 
 }

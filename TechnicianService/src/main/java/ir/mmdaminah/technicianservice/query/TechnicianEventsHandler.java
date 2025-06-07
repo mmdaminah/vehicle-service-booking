@@ -27,7 +27,7 @@ public class TechnicianEventsHandler {
         var technician = technicianMapper.toEntity(event);
         technicianRepository.save(technician);
 
-        log.info("TechnicianEventsHandler:TechnicianCreatedEvent: technicianId={}, firstName={}, lastName={}, workingDays={}", technician.getTechnicianId(), technician.getFirstName(), technician.getLastName(), technician.getWorkingDays().toString());
+        log.info("TechnicianEventsHandler: event={}", event);
     }
 
 }

@@ -29,7 +29,7 @@ public class TechnicianAggregate {
 
     @CommandHandler
     public TechnicianAggregate(CreateTechnicianCommand command) {
-        log.info("TechnicianAggregate:CreateTechnicianCommand: technicianId={}, firstName={}, lastName={}, workingHours={}", command.getTechnicianId(), command.getFirstName(), command.getLastName(), command.getWorkingDays().toString());
+        log.info("TechnicianAggregate:CreateTechnicianCommand: command={}", command.toString());
 
         var event = new TechnicianCreatedEvent();
         BeanUtils.copyProperties(command, event);

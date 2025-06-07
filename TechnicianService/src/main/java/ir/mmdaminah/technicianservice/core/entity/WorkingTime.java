@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 import java.math.BigInteger;
 
 @Entity
-@Table
+@Table(name = "working_times")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class WorkingTime {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private BigInteger id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Column(name = "start_hour")
     private Integer startHour;
